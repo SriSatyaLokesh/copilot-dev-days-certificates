@@ -172,16 +172,17 @@ function renderCertificateView(config, attendee) {
 }
 
 /**
- * Generate a QR code inside #cert-qr that encodes the full page URL.
+ * Generate a QR code inside #cert-qr that encodes the certificate URL.
  * Uses qrcode.js (window.QRCode) loaded from CDN.
- * Encoded URL = window.location.href (includes ?id= param — the verification link).
+ * Encoded URL = config.org_website if set, otherwise falls back to window.location.href.
  */
 function generateQR(config) {
   var container = document.getElementById('cert-qr');
   if (!container || typeof QRCode === 'undefined') return;
   container.innerHTML = '';
+  var qrUrl = (config.org_website && config.org_website.trim()) ? config.org_website.trim() : window.location.href;
   new QRCode(container, {
-    text: window.location.href,
+    text: qrUrl,
     width: 68,
     height: 68,
     colorDark: config.primary_color || '#1a2e4a',
