@@ -401,6 +401,7 @@ body {
    ======================================== */
 
 /* Wrapper: floating-card depth via filter drop-shadow */
+/* container-type enables cqw units inside — all cert sizes scale with card width */
 .certificate-wrapper {
   display: flex;
   justify-content: center;
@@ -410,6 +411,7 @@ body {
   margin: 0 auto;
   width: 100%;
   filter: drop-shadow(0 24px 64px rgba(0, 0, 0, 0.55));
+  container-type: inline-size;
 }
 
 /* A4 landscape proportions on screen (297mm x 210mm) */
@@ -422,12 +424,12 @@ body {
   color: var(--text-color);
   display: flex;
   flex-direction: column;
-  padding: 28px 44px 26px;
+  padding: 2.8cqw 4.4cqw 2.6cqw;
   box-sizing: border-box;
   position: relative;
   /* Inner gold border drawn via outline with negative offset */
   outline: 1.5px solid rgba(200, 169, 81, 0.45);
-  outline-offset: -18px;
+  outline-offset: -1.8cqw;
   /* Force all colors and backgrounds to print exactly as shown on screen
      This fixes logos and text being invisible when 'Background graphics' is OFF */
   -webkit-print-color-adjust: exact;
@@ -438,23 +440,23 @@ body {
 .certificate::before {
   content: '';
   position: absolute;
-  top: 28px;
-  left: 28px;
-  right: 28px;
-  bottom: 28px;
+  top: 2.8cqw;
+  left: 2.8cqw;
+  right: 2.8cqw;
+  bottom: 2.8cqw;
   background:
     /* Top-left corner */
-    linear-gradient(var(--secondary-color), var(--secondary-color)) top left / 22px 1.5px no-repeat,
-    linear-gradient(var(--secondary-color), var(--secondary-color)) top left / 1.5px 22px no-repeat,
+    linear-gradient(var(--secondary-color), var(--secondary-color)) top left / 2.2cqw 1.5px no-repeat,
+    linear-gradient(var(--secondary-color), var(--secondary-color)) top left / 1.5px 2.2cqw no-repeat,
     /* Top-right corner */
-    linear-gradient(var(--secondary-color), var(--secondary-color)) top right / 22px 1.5px no-repeat,
-    linear-gradient(var(--secondary-color), var(--secondary-color)) top right / 1.5px 22px no-repeat,
+    linear-gradient(var(--secondary-color), var(--secondary-color)) top right / 2.2cqw 1.5px no-repeat,
+    linear-gradient(var(--secondary-color), var(--secondary-color)) top right / 1.5px 2.2cqw no-repeat,
     /* Bottom-left corner */
-    linear-gradient(var(--secondary-color), var(--secondary-color)) bottom left / 22px 1.5px no-repeat,
-    linear-gradient(var(--secondary-color), var(--secondary-color)) bottom left / 1.5px 22px no-repeat,
+    linear-gradient(var(--secondary-color), var(--secondary-color)) bottom left / 2.2cqw 1.5px no-repeat,
+    linear-gradient(var(--secondary-color), var(--secondary-color)) bottom left / 1.5px 2.2cqw no-repeat,
     /* Bottom-right corner */
-    linear-gradient(var(--secondary-color), var(--secondary-color)) bottom right / 22px 1.5px no-repeat,
-    linear-gradient(var(--secondary-color), var(--secondary-color)) bottom right / 1.5px 22px no-repeat;
+    linear-gradient(var(--secondary-color), var(--secondary-color)) bottom right / 2.2cqw 1.5px no-repeat,
+    linear-gradient(var(--secondary-color), var(--secondary-color)) bottom right / 1.5px 2.2cqw no-repeat;
   pointer-events: none;
 }
 
@@ -463,19 +465,19 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: 0.8cqw;
+  margin-bottom: 1.2cqw;
 }
 
 .cert-logo {
-  max-height: 72px;
-  max-width: 220px;
+  max-height: 7.2cqw;
+  max-width: 22cqw;
   object-fit: contain;
 }
 
 .cert-org-name {
   font-family: var(--font-body);
-  font-size: 0.78rem;
+  font-size: 1.25cqw;
   letter-spacing: 0.06em;
   color: var(--secondary-color);
   margin: 0;
@@ -485,11 +487,11 @@ body {
 .cert-event-title {
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: 0.82rem;
+  font-size: 1.3cqw;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--primary-color);
-  margin: 2px 0 0;
+  margin: 0.2cqw 0 0;
   text-align: center;
 }
 
@@ -497,8 +499,8 @@ body {
 .cert-title-block {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 16px;
+  gap: 1.4cqw;
+  margin-bottom: 1.6cqw;
 }
 
 /* Gradient-fade ornament lines (more elegant than flat gold) */
@@ -516,7 +518,7 @@ body {
 
 .cert-heading-label {
   font-family: var(--font-heading);
-  font-size: 1.4rem;
+  font-size: 2.2cqw;
   font-style: italic;
   color: var(--primary-color);
   white-space: nowrap;
@@ -532,13 +534,13 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 4px;
+  gap: 0.4cqw;
 }
 
 .cert-pre-name-text,
 .cert-post-name-text {
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: 1.5cqw;
   color: var(--muted-color);
   margin: 0;
   letter-spacing: 0.02em;
@@ -546,10 +548,10 @@ body {
 
 .cert-name {
   font-family: var(--font-heading);
-  font-size: 3.4rem;
+  font-size: 5.4cqw;
   font-weight: 700;
   color: var(--secondary-color);
-  margin: 5px 0 3px;
+  margin: 0.5cqw 0 0.3cqw;
   line-height: 1.1;
   letter-spacing: -0.01em;
 }
@@ -558,31 +560,31 @@ body {
 .cert-name::after {
   content: '';
   display: block;
-  width: 80px;
+  width: 8cqw;
   height: 2px;
   background: var(--secondary-color);
-  margin: 10px auto 0;
+  margin: 1cqw auto 0;
   border-radius: 2px;
 }
 
 .cert-workshop {
   font-family: 'EB Garamond', Georgia, serif;
-  font-size: 1.4rem;
+  font-size: 2.2cqw;
   font-weight: 500;
   font-style: normal;
   color: var(--primary-color);
-  margin: 5px 0 0;
+  margin: 0.5cqw 0 0;
   opacity: 0.88;
 }
 
 .cert-description {
   font-family: var(--font-body);
-  font-size: 0.88rem;
+  font-size: 1.4cqw;
   color: var(--muted-color);
   max-width: 80%;
   text-align: center;
   font-style: italic;
-  margin: 5px 0 0;
+  margin: 0.5cqw 0 0;
   line-height: 1.55;
 }
 
@@ -591,8 +593,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-top: 10px;
-  padding-top: 10px;
+  margin-top: 1cqw;
+  padding-top: 1cqw;
   border-top: 1px solid rgba(200, 169, 81, 0.35);
 }
 
@@ -601,45 +603,45 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
-  min-width: 130px;
+  gap: 0.3cqw;
+  min-width: 13cqw;
 }
 
 .cert-footer-center {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 0.4cqw;
 }
 
 .cert-date {
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 1.4cqw;
   font-weight: 600;
   color: var(--text-color);
   margin: 0;
 }
 
 .cert-seal {
-  max-height: 72px;
-  max-width: 72px;
+  max-height: 7.2cqw;
+  max-width: 7.2cqw;
   object-fit: contain;
   opacity: 0.92;
 }
 
 .cert-signature {
-  max-height: 52px;
-  max-width: 150px;
+  max-height: 5.2cqw;
+  max-width: 15cqw;
   object-fit: contain;
 }
 
 .cert-authorized-name {
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 1.4cqw;
   font-weight: 700;
   color: var(--text-color);
   margin: 0;
-  padding-top: 5px;
+  padding-top: 0.5cqw;
   border-top: 1.5px solid rgba(26, 46, 74, 0.3);
   width: 100%;
   text-align: center;
@@ -647,7 +649,7 @@ body {
 
 .cert-footer-label {
   font-family: var(--font-body);
-  font-size: 0.72rem;
+  font-size: 1.15cqw;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--secondary-color);
@@ -655,7 +657,7 @@ body {
 
 .cert-seal-label {
   font-family: var(--font-heading);
-  font-size: 0.78rem;
+  font-size: 1.25cqw;
   font-style: italic;
   letter-spacing: 0.06em;
   color: var(--secondary-color);
@@ -667,8 +669,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
-  margin-top: 10px;
+  gap: 0.5cqw;
+  margin-top: 1cqw;
 }
 
 .cert-qr {
@@ -677,14 +679,14 @@ body {
 
 .cert-qr canvas,
 .cert-qr img {
-  width: 68px !important;
-  height: 68px !important;
+  width: 6.8cqw !important;
+  height: 6.8cqw !important;
   display: block;
 }
 
 .cert-qr-label {
   font-family: var(--font-body);
-  font-size: 0.62rem;
+  font-size: 1cqw;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--muted-color);
@@ -771,6 +773,35 @@ body {
     bottom: 8mm;
     border: 0.4pt solid rgba(200, 169, 81, 0.5);
     pointer-events: none;
+  }
+}
+
+/* ========================================
+   MOBILE RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+  /* Move download button to a full-width bottom bar on mobile */
+  .btn-download {
+    top: auto;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    width: calc(100% - 32px);
+    justify-content: center;
+    border-radius: 10px;
+  }
+
+  /* Add bottom padding so button doesn't overlap certificate */
+  #certificate-view {
+    padding-top: 12px;
+    padding-bottom: 80px;
+    justify-content: flex-start;
+  }
+
+  /* Tighter horizontal padding on search card for narrow screens */
+  .search-container {
+    padding: 32px 20px 28px;
   }
 }
 
