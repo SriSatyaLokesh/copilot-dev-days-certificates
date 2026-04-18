@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workshop Certificate</title>
+
+  <!-- SEO: base tags (updated by JS in certificate mode) -->
+  <meta name="description" content="View and download your workshop completion certificate.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" id="canonical-tag" href="">
+
+  <!-- SEO: Open Graph (social sharing) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="" id="og-title">
+  <meta property="og:description" content="" id="og-description">
+  <meta property="og:url" content="" id="og-url">
+  <meta property="og:image" content="" id="og-image">
+  <meta property="og:site_name" content="" id="og-site-name">
+
+  <!-- SEO: Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="" id="tw-title">
+  <meta name="twitter:description" content="" id="tw-description">
+  <meta name="twitter:image" content="" id="tw-image">
+  <meta name="twitter:site" content="" id="tw-site">
+
+  <!-- AEO: JSON-LD structured data placeholder (populated by JS) -->
+  <script type="application/ld+json" id="json-ld-block">{}</script>
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+          integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
+          crossorigin="anonymous"
+          defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+      crossorigin="anonymous"
+      defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+      crossorigin="anonymous"
+      defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+          integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+          crossorigin="anonymous"
+          defer></script>
+</head>
+<body>
+  <!-- LOADING: no hidden class — visible by default while app initialises -->
+  <div id="loading-view" class="view">
+    <div class="loading-spinner" role="status" aria-label="Loading"></div>
+  </div>
+
+  <!-- SEARCH: landing page — filled by renderSearchView() -->
+  <div id="search-view" class="view hidden">
+    <div class="search-container">
+      <img id="search-logo" src="" alt="" class="search-logo" />
+      <p id="search-org-name" class="search-org-name"></p>
+      <h1 id="search-headline" class="search-headline"></h1>
+      <p id="search-subtext" class="search-subtext"></p>
+      <div class="search-form" role="search">
+        <label for="lookup-input" class="search-label" id="search-label">Email address</label>
+        <div class="search-input-wrap">
+          <svg class="search-input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <input
+            type="email"
+            id="lookup-input"
+            class="search-input"
+            placeholder=""
+            autocomplete="email"
+            inputmode="email"
+            aria-label="Enter your registered email address"
+          />
+        </div>
+        <button id="lookup-btn" class="search-btn" type="button"></button>
+      </div>
+      <p id="search-footer-note" class="search-footer-note"></p>
+    </div>
+  </div>
+
+  <!-- CERTIFICATE: filled by renderCertificateView() -->
+  <div id="certificate-view" class="view hidden">
+    <!-- Floating download button (hidden in print/PDF) -->
+    <button id="download-btn" class="btn-download no-print" type="button" aria-label="Download certificate as PDF">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download PDF
+    </button>
+    <div id="pdf-download-help" class="pdf-download-help no-print hidden" role="status" aria-live="polite">
+      <p id="pdf-download-help-text" class="pdf-download-help-text"></p>
+      <a id="pdf-open-link" class="pdf-open-link" href="#" target="_blank" rel="noopener">Open PDF</a>
+    </div>
+    <div class="certificate-wrapper">
+      <div class="certificate" id="certificate"
+           itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
+
+        <div class="cert-corner cert-corner-tl" aria-hidden="true"></div>
+        <div class="cert-corner cert-corner-tr" aria-hidden="true"></div>
+        <div class="cert-corner cert-corner-bl" aria-hidden="true"></div>
+        <div class="cert-corner cert-corner-br" aria-hidden="true"></div>
+
+        <div class="cert-header">
+          <img id="cert-logo" src="" alt="" class="cert-logo" />
+          <p class="cert-org-name" id="cert-org-name"></p>
+          <p class="cert-event-title" id="cert-event-title"></p>
+        </div>
+
+        <div class="cert-title-block">
+          <div class="cert-ornament-line"></div>
+          <p class="cert-heading-label" id="cert-heading-label"></p>
+          <div class="cert-ornament-line"></div>
+        </div>
+
+        <div class="cert-body">
+          <p class="cert-pre-name-text" id="cert-pre-name-text"></p>
+        <h1 class="cert-name" id="cert-name" itemprop="about" itemscope itemtype="https://schema.org/Person">
+          <span itemprop="name"></span>
+        </h1>
+          <p class="cert-post-name-text" id="cert-post-name-text"></p>
+          <h2 class="cert-workshop" id="cert-workshop" itemprop="name"></h2>
+          <p class="cert-description hidden" id="cert-description" itemprop="description"></p>
+          <div class="cert-qr-section" id="cert-qr-section">
+            <div id="cert-qr" class="cert-qr"></div>
+            <span class="cert-qr-label">Scan to verify</span>
+          </div>
+        </div>
+
+        <div class="cert-footer">
+          <div class="cert-footer-left">
+            <time class="cert-date" id="cert-date" itemprop="dateCreated" datetime=""></time>
+            <span class="cert-footer-label" id="cert-date-label"></span>
+          </div>
+          <div class="cert-footer-center">
+            <img id="cert-seal" src="" alt="Official Seal" class="cert-seal" />
+            <p class="cert-seal-label" id="cert-seal-label"></p>
+          </div>
+          <div class="cert-footer-right">
+            <img id="cert-signature" src="" alt="Authorized Signature" class="cert-signature" />
+            <p class="cert-authorized-name" id="cert-authorized-name"></p>
+            <span class="cert-footer-label" id="cert-sig-label"></span>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ERROR / NOT FOUND — hardcoded because branding config may be the thing that failed -->
+  <div id="error-view" class="view hidden" role="alert">
+    <div class="error-container">
+      <div class="error-illustration" aria-hidden="true">
+        <svg width="180" height="160" viewBox="0 0 180 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Tilted certificate -->
+          <g transform="rotate(-8, 90, 65)">
+            <rect x="20" y="12" width="132" height="96" rx="5" fill="#f8f5ef" stroke="#c8a951" stroke-width="2.5"/>
+            <rect x="28" y="20" width="116" height="80" rx="3" fill="none" stroke="#c8a951" stroke-width="1.2" opacity="0.5"/>
+            <rect x="44" y="34" width="76" height="5" rx="2.5" fill="#1a2e4a" opacity="0.12"/>
+            <rect x="52" y="46" width="60" height="4" rx="2" fill="#1a2e4a" opacity="0.09"/>
+            <rect x="48" y="56" width="68" height="4" rx="2" fill="#1a2e4a" opacity="0.07"/>
+            <text x="86" y="90" text-anchor="middle" font-size="42" font-family="Georgia, serif" fill="#1a2e4a" opacity="0.18">?</text>
+          </g>
+          <!-- Magnifying glass -->
+          <circle cx="136" cy="120" r="25" fill="none" stroke="#1a2e4a" stroke-width="3.5"/>
+          <circle cx="136" cy="120" r="17" fill="rgba(200,169,81,0.1)"/>
+          <line x1="154" y1="138" x2="172" y2="156" stroke="#1a2e4a" stroke-width="4" stroke-linecap="round"/>
+          <!-- Trailing search dots -->
+          <circle cx="28" cy="130" r="3" fill="#c8a951" opacity="0.45"/>
+          <circle cx="52" cy="140" r="2.5" fill="#c8a951" opacity="0.35"/>
+          <circle cx="76" cy="134" r="2" fill="#c8a951" opacity="0.28"/>
+          <circle cx="98" cy="126" r="2" fill="#c8a951" opacity="0.2"/>
+        </svg>
+      </div>
+      <p class="error-message" id="error-message">Could not load configuration. Please try again.</p>
+      <p class="error-tagline">We checked everywhere. Even under the desk.</p>
+      <p class="error-detail hidden" id="error-detail"></p>
+      <button class="error-retry-btn" id="retry-btn" type="button" aria-label="Try again">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+        Try Again
+      </button>
+    </div>
+  </div>
+
+  <script src="assets/app.js" defer></script>
+</body>
+</html>
